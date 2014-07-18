@@ -2,7 +2,7 @@
 Tool for extracting xtrabackup to sqldump files
 
 ## Usage
-'''
+```
 usage: xtrabackup2sql.py [-h] [--uid UID] [--tmpdir TMPDIR]
                          [--database DATABASE [DATABASE ...]]
                          [--outdir OUTDIR] [--cleanup]
@@ -23,24 +23,25 @@ optional arguments:
                         can be used.
   --outdir OUTDIR       output dir, default to current working directory.
   --cleanup             set to perform clean up of temp files.
-'''
+```
 
 ## Requirments
-python
-percona-xtrabackup
-qpress
-xbstream
-mysql
+- python
+- percona-xtrabackup
+- qpress
+- xbstream
+- mysql-server
 
 ### Tested on:
 - CentOS 6.5
 
 ## Install 
 ### CentOS 6.5
+```
 yum install python-argparse mysql-server MySQL-python
-
 rpm -Uhv http://www.percona.com/downloads/percona-release/percona-release-0.0-1.x86_64.rpm
 yum install qpress percona-xtrabackup-20 percona-toolkit-2.1.10-1
+```
 
 ### Ubuntu 12.04
 
