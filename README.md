@@ -34,6 +34,7 @@ optional arguments:
 
 ### Tested on:
 - CentOS 6.5
+- Ubuntu 12.04
 
 ## Install 
 ### CentOS 6.5
@@ -44,9 +45,16 @@ yum install qpress percona-xtrabackup-20 percona-toolkit-2.1.10-1
 ```
 
 ### Ubuntu 12.04
+Add percona package repo http://www.percona.com/doc/percona-server/5.5/installation/apt_repo.html
+```
+sudo apt-get install python-mysqldb mysql-server
+sudo apt-get install percona-xtrabackup qpress
+```
+
+## Known Issues
+- Doesn't work with Apparmor or Selinux
 
 ## TODO
-- Test on Ubuntu 12.04
 - Prevent from being run as root, implement --uid
 - Work with non xbstream backups
 - Compress output, bz2 or gzip

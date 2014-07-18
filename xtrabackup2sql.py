@@ -92,6 +92,9 @@ def main():
   else:
     temp_dir = args.tmpdir
 
+  if os.path.isdir(args.outdir) == False:
+    os.mkdir(args.outdir)
+
   # Start processing
   pp = pprint.PrettyPrinter(indent=2)
 
@@ -111,7 +114,7 @@ def main():
   # Start MySQL service
   if os.path.isdir(temp_dir+'/tmp') is False:
     os.mkdir(temp_dir+'/tmp')
-  my_process = subprocess.Popen(['/usr/libexec/mysqld',
+  my_process = subprocess.Popen(['mysqld',
     '--pid-file='+temp_dir+'/mysqld.pid',
     '--skip-networking',
     '--tmpdir='+temp_dir+'/tmp',
