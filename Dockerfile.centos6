@@ -1,0 +1,17 @@
+FROM centos:6
+
+RUN yum install -y http://www.percona.com/downloads/percona-release/percona-release-0.0-1.x86_64.rpm \
+  http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm && \
+  yum install -y python-pip Percona-Server-server-51 MySQL-python qpress percona-xtrabackup-20 percona-toolkit
+
+RUN mkdir tmp_out && \
+  chown 27:27 tmp_out/
+
+ENV PATH /usr/libexec:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV PS1 "[\u@\h \W]\\$ "
+
+ADD requirements.txt /requirements.txt
+RUN pip install -r /requirements.txt
+
+ADD xtrabackup2sql.py /xtrabackup2sql.py
+

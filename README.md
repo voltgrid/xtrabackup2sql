@@ -1,28 +1,21 @@
-## Description
+## Xtrabackup2sql
+
 Tool for extracting xtrabackup to sqldump files
 
 ## Usage
 ```
-usage: xtrabackup2sql.py [-h] [--uid UID] [--tmpdir TMPDIR]
-                         [--database DATABASE [DATABASE ...]]
-                         [--outdir OUTDIR] [--cleanup]
-                         file
+Usage: xtrabackup2sql.py [OPTIONS] SRC
 
-Extract XtraBackup to sql dump files.
+  This script converts a binary xtrabackup or innobackupex file to a sql
+  dump as would be produced by mysqldump
 
-positional arguments:
-  file                  input file to process.
-
-optional arguments:
-  -h, --help            show this help message and exit
-  --uid UID             user to start mysql as, only required if running as
-                        root.
-  --tmpdir TMPDIR       alternate tmp dir to use.
-  --database DATABASE [DATABASE ...]
-                        databases to be extracted. Wildcards such as ? or *
-                        can be used.
-  --outdir OUTDIR       output dir, default to current working directory.
-  --cleanup             set to perform clean up of temp files.
+Options:
+  --user TEXT               user to start mysql as when running as root
+  --tmpdir TEXT             alternate tmp dir to use
+  --databases TEXT          databases to be extracted. Wildcards can be used.
+  --outdir TEXT             output dir.  [default: /]
+  --cleanup / --no-cleanup  cleanup tmp when completed  [default: False]
+  --help                    Show this message and exit.
 ```
 
 ## Requirments
@@ -55,10 +48,20 @@ sudo apt-get install percona-xtrabackup qpress
 - Doesn't work with Apparmor or Selinux
 
 ## TODO
-- Prevent from being run as root, implement --uid
-- Work with non xbstream backups
-- Compress output, bz2 or gzip
-- Add option for single file output
-- Add error checking on mysqldump
-- Clean up output
-- Clean up README
+- Work with non xbstream backups.
+- Compress options none, bz2 or gzip. Currently only bz2.
+- Add option for single file output.
+- Add error checking on mysqldump.
+- Prevent MySQL process from becoming orphaned.
+- Clean up output. Coloured loggin, settable loglevel, hide mysql output.
+- Clean up README.
+
+## Development
+
+```
+# Fedora 22
+sudo dnf install python-virtualenv MySQL-python
+virtualenv --system-site-packages .venv
+. .venv/bin/activate
+pip install -r requirements.txt
+```
